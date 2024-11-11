@@ -1,6 +1,7 @@
 {
   "name": "advent-of-code-2023",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "repository": {
@@ -8,7 +9,9 @@
     "url": "git+https://github.com/LazulDev/advent-of-code-2023.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/day/1/main.js",
+    "watch": "node --watch src/day/1/main.js"
   },
   "keywords": [],
   "author": "",
