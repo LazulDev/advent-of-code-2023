@@ -9,7 +9,7 @@
     "url": "git+https://github.com/LazulDev/advent-of-code-2023.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test --test-reporter=spec",
     "start": "node src/day/1/main.js",
     "watch": "node --watch src/day/1/main.js"
   },
