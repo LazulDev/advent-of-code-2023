@@ -12,8 +12,15 @@ function main() {
     const lastCharacters = lines
         .map(line => reverseString(line))
         .map(line => line.at(line.search(NUMERIC_CHAR_REGEX)))
-    console.log(firstCharacters)
-    console.log(lastCharacters)
+
+    
+    const linesDigit = []
+    lines.forEach((_, index) => {
+        linesDigit.push(firstCharacters[index]+lastCharacters[index])
+    })
+    
+    const result = sumArray(linesDigit.map(str => +str))
+    console.log(result)
 }
 main()
 
@@ -21,4 +28,12 @@ main()
 
 function reverseString(input) {
     return input.split("").reverse().join("")
+}
+
+function sumArray(arr) {
+    let sum = 0;
+    arr.forEach(res => {
+        sum += res
+    })
+    return sum
 }
