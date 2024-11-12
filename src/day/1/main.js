@@ -3,9 +3,16 @@ pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet`
 const NUMERIC_CHAR_REGEX = '[1-9]'
+
 function main() {
     // TODO get from assets/day/1/input.txt
     const calibrationDocument = MOCKED_CALIBRATION_DOCUMENT
+    const result = algorithm(MOCKED_CALIBRATION_DOCUMENT)
+    console.log(result)
+}
+main()
+
+function algorithm(calibrationDocument) {
     const lines = calibrationDocument.split('\n')
     const firstCharacters = lines
         .map(line => line.at(line.search(NUMERIC_CHAR_REGEX)))
@@ -13,16 +20,13 @@ function main() {
         .map(line => reverseString(line))
         .map(line => line.at(line.search(NUMERIC_CHAR_REGEX)))
 
-    
     const linesDigit = []
     lines.forEach((_, index) => {
         linesDigit.push(firstCharacters[index]+lastCharacters[index])
     })
     
-    const result = sumArray(linesDigit.map(str => +str))
-    console.log(result)
+    return sumArray(linesDigit.map(str => +str))
 }
-main()
 
 // TODO move to utils
 
