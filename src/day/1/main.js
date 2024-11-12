@@ -7,8 +7,11 @@ function main() {
     // TODO get from assets/day/1/input.txt
     const calibrationDocument = MOCKED_CALIBRATION_DOCUMENT
     const lines = calibrationDocument.split('\n')
-    const firstCharacters = lines.map(line => line.search(NUMERIC_CHAR_REGEX))
-    const lastCharacters = lines.map(line => reverseString(line)).map(line => line.search(NUMERIC_CHAR_REGEX))
+    const firstCharacters = lines
+        .map(line => line.at(line.search(NUMERIC_CHAR_REGEX)))
+    const lastCharacters = lines
+        .map(line => reverseString(line))
+        .map(line => line.at(line.search(NUMERIC_CHAR_REGEX)))
     console.log(firstCharacters)
     console.log(lastCharacters)
 }
