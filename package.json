@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/LazulDev/advent-of-code-2023.git/issues"
   },
-  "homepage": "https://github.com/ManzDev/advent-of-code-2023.git#readme"
+  "homepage": "https://github.com/ManzDev/advent-of-code-2023.git#readme",
+  "engines": {
+    "node": ">=18",
+    "npm": ">=10"
+  }
 }
