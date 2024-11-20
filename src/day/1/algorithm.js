@@ -14,7 +14,6 @@ export function algorithm(calibrationDocument) {
     lines.forEach((_, index) => {
         linesDigit.push(firstCharacters[index]+lastCharacters[index])
     })
-    
     return sumArray(linesDigit.map(str => +str))
 }
 
