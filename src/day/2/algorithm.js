@@ -1,33 +1,32 @@
-import sumArray from "../../utils/sum-array.js";
+import { getLines } from "../../utils/get-lines.js";
 
-const NUMERIC_OR_CHAR_NUMBER_REGEX = '[1-9]|one|two|three|four|five|six|seven|eight|nine';
-export default function algorithm(calibrationDocument) {
-    // TODO implement
-    const lines = calibrationDocument.split('\n')
-    const firstCharacters = lines
-        .map(line => line.at(line.search(NUMERIC_OR_CHAR_NUMBER_REGEX)))
-    const lastCharacters = lines
-        .map(line => line.at(line.search(NUMERIC_OR_CHAR_NUMBER_REGEX)))
-    console.log(firstCharacters)
-    console.log(lastCharacters)
-    const linesDigit = []
-    lines.forEach((_, index) => {
-        linesDigit.push(firstCharacters[index]+lastCharacters[index])
-    })
-    
-    return sumArray(linesDigit.map(str => +str))
+const MAX_CUBES_CONFIG = { red: 12, green: 13, blue: 14 }
+
+export default function algorithm(input) {
+
+    return getLines(input)
+        .map(line => {
+            const gameSequences = line.split(': ').at(1)
+            let impossible = false
+            gameSequences.split(/, |; /).forEach((cube) => {
+                let [count, color] = cube.split(' ').map(i => i.trim())
+
+                if (Number(count) > MAX_CUBES_CONFIG[color]) {
+                    impossible = true
+                    return
+                }
+            })
+            return {
+                game: getLineGame(line),
+                impossible
+            }
+        })
+        .filter(game => game.impossible === false)
+        .map(({game}) => game)
+        .reduce((a,b) => a + b, 0)
 }
 
-// Idea
-const CHAR_TO_NUMBER_MAP = {
-   zero: 0,
-   one: 1,
-   two: 2,
-   three: 3,
-   four: 4,
-   five: 5,
-   six: 6,
-   seven: 7,
-   eight: 8,
-   nine: 9,
+function getLineGame(line) {
+    return Number(line.split(':').at(0).split(' ').at(1))
 }
+
