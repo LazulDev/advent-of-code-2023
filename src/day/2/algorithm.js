@@ -40,7 +40,7 @@ function part2(input) {
     return getLines(input).map(line => {
         const [, sequence] = line.split(': ')
         const minCubes = { red: 0, green: 0, blue: 0 }
-        
+
         sequence.split(/, |; /).forEach((cube) => {
             let [count, color] = cube.split(' ').map(i => i.trim())
             if(Number(count) > minCubes[color]) {

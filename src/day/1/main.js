@@ -5,6 +5,7 @@ import getInput from "../../utils/get-input.js";
 function main() {
     const input = getInput({day: 1})
     const result = algorithm(input)
+    // TODO: implement part 2
     console.log(result)
 }
 main()
