@@ -81,10 +81,89 @@ function isSymbolAdjacent({num, row, col}, input) {
     }
 
     return false
+}
+/**
+ * Return the adjacents position given a gear (symbol *) position
+ * @param {*} row and col determine the position of the gear
+ */
+function getNumAdjacentsNumbers({row, col, input}) {
+    const adjacents = [] // {row, col}
+    const width = 1
+    const lines = getLines(input)
 
+
+     // TODO
+    const upperRow = lines[row - 1]
+    if (upperRow) {
+        const init = col - 1 >= 0 ?col - 1 : 0
+        const end = col + width + 1 < upperRow.length ? col + width + 1 : upperRow.length
+        const upperSegment = upperRow.slice(init, end)
+        const upperLineHasSymbol = NUM_REGEX.test(upperSegment)
+        if (upperLineHasSymbol) {
+            return true
+        }
+    }
+
+    const lowerRow = lines[row + 1]
+    if (lowerRow) {
+        const init = col - 1 >= 0 ?col - 1 : 0
+        const end = col + width + 1 < lowerRow.length ? col + width + 1 : lowerRow.length
+        const lowerSegment = lowerRow.slice(init, end)
+        const lowerSegmentHasSymbol = NUM_REGEX.test(lowerSegment)
+        if (lowerSegmentHasSymbol) {
+            return true
+        }
+    }
+
+    const sameRow = lines[row]
+
+    const leftPos = col - 1
+    if (leftPos > 0) {
+        const leftChar = sameRow.at(leftPos)
+        if (NUM_REGEX.test(leftChar)) {
+            return true
+        }
+    }
+
+    const rightPos = col + numLength + 1 - 1
+    if (rightPos < sameRow.length) {
+        const rightChar = sameRow.at(rightPos)
+
+        if (NUM_REGEX.test(rightChar)) {
+            return true
+        }
+    }
+
+    return adjacents
 }
 
+const input = 
+`467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598..`
+
+const GEAR_REGEX = new RegExp(/\*/g);
+
 function part2(input) {
-    return getLines(input)
+    const gears = []
+    const lines = getLines(input).forEach((line, row) => {
+        let match = null
+        while ((match = GEAR_REGEX.exec(line)) !== null) {
+            gears.push({row, col: match.index})
+        }
+    })
+    return gears
+        // Set adjacents
+        .map(({row,col}) => ({ row, col, numAdjacents: getNumAdjacentsNumbers({row, col, input })})
+        .filter(({adjacents}) => {})
+    
+    // gears = [{row:0, col:0, adjacents:[]}]
 }
 
